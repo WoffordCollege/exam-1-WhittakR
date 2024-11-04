@@ -115,16 +115,13 @@ public class ConnectFour {
         // Question 1
         String colString = getColumnAsString(column);
         if (colString == "") {
-            System.out.println("EMPTY");
             return Location.EMPTY;
         } else {
             String Token = Character.toString(colString.charAt(colString.length() - 1));
             System.out.println(Token);
             if (Token.equals("R")) {
-                System.out.println("RED");
                 return Location.RED;
             } else {
-                System.out.println("BLACK");
                 return Location.BLACK;
             }
         }
