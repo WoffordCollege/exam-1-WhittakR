@@ -113,9 +113,22 @@ public class ConnectFour {
      */
     public Location getTopOfColumn(int column) {
         // Question 1
+        String colString = getColumnAsString(column);
+        if (colString == "") {
+            System.out.println("EMPTY");
+            return Location.EMPTY;
+        } else {
+            String Token = Character.toString(colString.charAt(colString.length() - 1));
+            System.out.println(Token);
+            if (Token.equals("R")) {
+                System.out.println("RED");
+                return Location.RED;
+            } else {
+                System.out.println("BLACK");
+                return Location.BLACK;
+            }
+        }
         // TODO
-        
-        return Location.EMPTY;
     }
     
     /**
@@ -128,9 +141,13 @@ public class ConnectFour {
      */
     public int getHeightOfColumn(int column) {
         // Question 2
+        String colString = getColumnAsString(column);
+        if (colString == "") {
+            return 0;
+        } else {
+            return colString.length();
+        }
         // TODO
-        
-        return 0;
     }
     
     /**
@@ -145,9 +162,27 @@ public class ConnectFour {
      */
     public void dropToken(int column) {
         // Question 3
-        // TODO
-        
+        if (redTurn) {
+            if (getColumnAsString(column).length() >= 6) {
+                throw new ColumnFullException();
+            } else if (column < 0 || column > 6) {
+                System.out.println("Invalid Move, Try Again");
+            } else {
+                setLocation(getColumnAsString(column).length(), column, Location.RED);
+                redTurn = false;
+            }
+        } else {
+            if (getColumnAsString(column).length() >= 6) {
+                throw new ColumnFullException();
+            } else if (column < 0 || column > 6) {
+                System.out.println("Invalid Move, Try Again");
+            } else {
+                setLocation(getColumnAsString(column).length(), column, Location.BLACK);
+                redTurn = true;
+            }
+        }
     }
+        // TODO
     
     /**
      * This method returns the current result of the game. If the
@@ -170,7 +205,13 @@ public class ConnectFour {
         //       along a column.
         
         // TODO
-        
+        for (int i = 0; i < 6; i++) {
+            if (getColumnAsString(i).equals("BBBB")) {
+                return Result.BLACKWIN;
+            } else if (getColumnAsString(i).equals("RRRR")) {
+                return Result.REDWIN;
+            }
+        }
         return Result.NONE;
     }
     
@@ -192,6 +233,7 @@ public class ConnectFour {
      */
     public String toString() {
         // Question 5
+
         // TODO
         
         return "";
